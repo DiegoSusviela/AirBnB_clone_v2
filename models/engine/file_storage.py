@@ -46,3 +46,7 @@ class FileStorage:
                 self.__objects[key] = props[js[key]["__class__"]](**js[key])
         except:
             pass
+
+    def close(self):
+        """close moethod"""
+        self.reload()
