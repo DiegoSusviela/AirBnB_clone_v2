@@ -1,13 +1,12 @@
-#!/usr/bin/python
-""" Creation of class user"""
+#!/usr/bin/python3
+""" State Module for HBNB project """
+import models
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 
-from models.base_model import BaseModel
 
-
-class Amenity(BaseModel):
-    """ creation of class Amenity"""
-    name = ""
-
-    def __init__(self, *args, **kwargs):
-        """Initialization fo class Amenity"""
-        super().__init__(*args, **kwargs)
+class Amenity(BaseModel, Base):
+    """sbfsjds  k """
+    __tablename__ = 'amenities'
+    name = Column(String(128), nullable=False)
