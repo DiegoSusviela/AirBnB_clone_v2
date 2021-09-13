@@ -7,33 +7,27 @@ from models import storage
 from models.state import State
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route('/states')
-def states():
+@app.route('/states', strict_slashes=False)
+@app.route('/states/<state_id>', strict_slashes=False)
+def states(state_id=None):
     """returns"""
-    states = storage.all(State)
-    return render_template('7-states_list.html', states=states)
+    state_dict = storage.all(State)
+    found = None
+    if id is not None:
+        for state in state_dict.values():
+            if state.id == id:
+                found = state
+
+    return render_template('9-states.html', state_dict=state_dict, id=id,
+                           found=found)
 
 
 @app.teardown_appcontext
-def remove_sesh(self):
+def teardown_db(exception):
     """returns"""
     storage.close()
 
-@app.route("/states/<id>")
-def statesId(id=None):
-    """returns"""
-    aux = storage.all(State)
-    check = False
-    states = None
-    for s in aux.values():
-        if s.id == id:
-            states = s
-            check = True
-            break
-    return render_template('9-states.html', states=states, check=check)
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000')
