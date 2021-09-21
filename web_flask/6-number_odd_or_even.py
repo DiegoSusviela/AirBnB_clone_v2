@@ -52,12 +52,7 @@ def number_templates(n):
 def numbersandevenness(n):
     """display a HTML page only if n is an integer"""
     try:
-        if int(n) % 2 == 0:
-            parity = 'even'
-        else:
-            parity = 'odd'
-        return render_template('6-number_odd_or_even.html', n=int(n),
-                            parity=parity)
+        return render_template('6-number_odd_or_even.html', n=int(n))
     except:
         abort(404)
 
