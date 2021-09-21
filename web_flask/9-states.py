@@ -13,8 +13,8 @@ app = Flask(__name__)
 def states(state_id=None):
     """returns"""
     states = storage.all(State)
-    if id:
-        return render_template('9-states.html', states=states, id=id)
+    if (id):
+        return render_template('9-states.html', states=states, id=state_id)
     return render_template('9-states.html', states=states)
 
 
