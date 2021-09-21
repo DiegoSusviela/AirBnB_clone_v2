@@ -10,11 +10,11 @@ app = Flask(__name__)
 
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<state_id>', strict_slashes=False)
-def states(id=None):
+def states(state_id=None):
     """returns"""
     states = storage.all(State)
-    if (id):
-        return render_template('9-states.html', states=states, id=id)
+    if (state_id):
+        return render_template('9-states.html', states=states, id=state_id)
     return render_template('9-states.html', states=states)
 
 
