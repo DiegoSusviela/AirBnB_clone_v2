@@ -5,13 +5,14 @@
     </HEAD>
     <BODY>
     {% if id is none %}
-    {% set ns = namespace(foo=False) %}
-        <H1>States</H1>
+    <H1>States</H1>
         <UL>
-          {% for state in state.values()|sort(attribute="name") %}
+            {% for state in state.values()|sort(attribute="name") %}
             <LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
-		{% endfor %}
+		    {% endfor %}
         </UL>
+    {% else %}
+    {% set ns = namespace(foo=False) %}
         {% for state in state.values()|sort(attribute="name") %}
         {% if state.id == id %}
         {% set ns.foo = True %}
