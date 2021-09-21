@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """starts flask"""
 
-from flask import Flask, abort, render_template
+from flask import Flask, render_template
 from models.state import State
 from models import storage
 app = Flask(__name__)
@@ -15,7 +15,7 @@ def states_list():
 
 
 @app.teardown_appcontext
-def teardown_db(exception):
+def teardown_db(self):
     """returns"""
     storage.close()
 
