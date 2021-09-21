@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """starts flask"""
 
-from flask import Flask
-from flask import render_template
+from flask import Flask, abort, render_template
 from models.state import State
 from models import storage
 app = Flask(__name__)
@@ -11,7 +10,7 @@ app = Flask(__name__)
 @app.route('/states_list', strict_slashes=False)
 def states_list():
     """returns"""
-    states = storage.all(State)
+    states = list(storage.all(State))
     return render_template('7-states_list.html', states=states)
 
 
