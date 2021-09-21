@@ -12,9 +12,9 @@ app = Flask(__name__)
 @app.route('/states/<state_id>', strict_slashes=False)
 def states(state_id=None):
     """returns"""
-    state_dict = storage.all(State)
+    states = storage.all(State)
     if id:
-        return render_template('9-states.html', state=state, id=id)
+        return render_template('9-states.html', states=states, id=id)
 
 
 @app.teardown_appcontext
