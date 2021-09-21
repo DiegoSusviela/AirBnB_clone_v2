@@ -4,14 +4,7 @@
         <TITLE>HBNB</TITLE>
     </HEAD>
     <BODY>
-    {% if id is none %}
-        <H1>States</H1>
-            <UL>
-                {% for state in state.values()|sort(attribute="name") %}
-                <LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
-                {% endfor %}
-            </UL>
-    {% else %}
+    {% if id %}
     {% set ns = namespace(foo=False) %}
         {% for state in states.values()|sort(attribute="name") %}
         {% if state.id == id %}
@@ -25,7 +18,14 @@
         </UL>
         {% endif %}
         {% endfor %}
-    {% if ns.foo == False %} <H1>Not found!</H1> {% endif %}
+        {% if ns.foo == False %} <H1>Not found!</H1> {% endif %}
+    {% else %}
+        <H1>States</H1>
+        <UL>
+            {% for state in state.values()|sort(attribute="name") %}
+            <LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
+            {% endfor %}
+        </UL>
     {% endif %}
     </BODY>
 </HTML>
