@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """starts flask"""
 
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template
 from models import storage
 from models.state import State
 
@@ -14,18 +13,12 @@ app = Flask(__name__)
 def states(state_id=None):
     """returns"""
     state_dict = storage.all(State)
-    found = None
-    if id is not None:
-        for state in state_dict.values():
-            if state.id == id:
-                found = state
-
-    return render_template('9-states.html', state_dict=state_dict, id=id,
-                           found=found)
+    if id:
+        return render_template('9-states.html', state=state, id=id)
 
 
 @app.teardown_appcontext
-def teardown_db(exception):
+def teardown_db(self):
     """returns"""
     storage.close()
 
