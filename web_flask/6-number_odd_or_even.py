@@ -30,27 +30,36 @@ def pythoncool(text='is cool'):
     return 'Python ' + text.replace('_', ' ')
 
 
-@app.route('/number/<int:n>', strict_slashes=False)
+@app.route('/number/<n>', strict_slashes=False)
 def numver(n):
     """returns"""
-    return '%d is a number' % n
+    try:
+        return '%d is a number'.format(int(n))
+    except:
+        abort(404)
 
 
-@app.route('/number_template/<int:n>', strict_slashes=False)
+@app.route('/number_template/<n>', strict_slashes=False)
 def number_templates(n):
     """returns"""
-    return render_template('5-number.html', n=n)
+    try:
+        return render_template('5-number.html', n=int(n))
+    except:
+        abort(404)
 
 
-@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
+@app.route('/number_odd_or_even/<n>', strict_slashes=False)
 def numbersandevenness(n):
     """display a HTML page only if n is an integer"""
-    if n % 2 == 0:
-        parity = 'even'
-    else:
-        parity = 'odd'
-    return render_template('6-number_odd_or_even.html', n=n,
-                           parity=parity)
+    try:
+        if int(n) % 2 == 0:
+            parity = 'even'
+        else:
+            parity = 'odd'
+        return render_template('6-number_odd_or_even.html', n=int(n),
+                            parity=parity)
+    except:
+        abort(404)
 
 
 if __name__ == "__main__":
