@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """starts flask"""
 
-from flask import Flask
+from flask import Flask, escape, abort, render_template
 app = Flask(__name__)
 
 
@@ -30,16 +30,22 @@ def pythoncool(text='is cool'):
     return 'Python ' + text.replace('_', ' ')
 
 
-@app.route('/number/<int:n>', strict_slashes=False)
+@app.route('/number/<n>', strict_slashes=False)
 def numver(n):
     """returns"""
-    return '%d is a number' % n
+    try:
+        return '%d is a number'.format(int(n))
+    except:
+        abort(404)
 
 
-@app.route('/number_template/<int:n>', strict_slashes=False)
+@app.route('/number_template/<n>', strict_slashes=False)
 def number_templates(n):
     """returns"""
-    return render_template('5-number.html', n=n)
+    try:
+        return render_template('5-number.html', n=int(n))
+    except:
+        abort(404)
 
 
 if __name__ == "__main__":
