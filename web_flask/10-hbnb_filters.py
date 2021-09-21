@@ -2,8 +2,8 @@
 """starts flask"""
 
 from flask import Flask, render_template
-from models.states import State
-from models.amenities import Amenity
+from models.state import State
+from models.amenity import Amenity
 from models import storage
 app = Flask(__name__)
 
